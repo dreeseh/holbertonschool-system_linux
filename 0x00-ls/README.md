@@ -47,12 +47,14 @@ started 04-12-2021, must end by 04-16-2021
 
 ### Compilation:
 Your program must me compiled using GCC & flags:
-    - gcc -Wall -Werror -Wextra -pedantic *.c -o hls
+    ```
+    gcc -Wall -Werror -Wextra -pedantic *.c -o hls
+    ```
 
 ### Testing:
-    - Your program should give the same result as the real ls:
+Your program should give the same result as the real ls:
 
-'''
+        ```
         $ ls test
         abc  BCD  file  file2  file3  folder1  folder2  folder3
         $ ./hls test
@@ -78,7 +80,7 @@ Your program must me compiled using GCC & flags:
         folder3
         hls
         $
-'''
+        ```
 
 ### Details:
 For all tasks of this project, unless explicitly said otherwise:
