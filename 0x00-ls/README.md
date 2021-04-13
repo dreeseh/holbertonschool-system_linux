@@ -91,13 +91,11 @@ For all tasks of this project, unless explicitly said otherwise:<br>
 - Create a program that lists the content of the current directory.
 - Usage : hls
 
-        ```
         wilfried@~$ ls
         abc  file  File2  file3  folder1  Folder2  folder3  hls
         wilfried@~$ ./hls
         abc  file  File2  file3  folder1  Folder2  folder3  hls
         wilfried@~$
-        ```
 
 Repo:<br>
 - GitHub repository: holbertonschool-system_linux
@@ -113,7 +111,6 @@ Repo:<br>
 - No such file or directory, Permission denied, etc…
 - Don’t forget the exit value
 
-        ```
         wilfried@~$ ls test
         abc  file  File2  file3  folder1  Folder2  folder3
         wilfried@~$ ./hls test
@@ -127,7 +124,6 @@ Repo:<br>
         /simple_ls$ ./hls test/random
         hls: cannot access test/random: No such file or directory
         wilfried@~$
-        ```
 
 Repo:<br>
 - GitHub repository: holbertonschool-system_linux
@@ -138,7 +134,6 @@ Repo:<br>
 - Usage : hls [-1] [FILE]...
 - For the rest of the project, an option will be identified by a command-line argument starting with the character - (like ls).
 
-        ```
         wilfried@~$ ls test -1
         abc
         file
@@ -156,7 +151,6 @@ Repo:<br>
         Folder2
         folder3
         wilfried@~$
-        ```
 
     - Pay attention to “edge cases”: you should be able to handle multiple options, in any order.
 
@@ -168,7 +162,6 @@ Repo:<br>
 - Implement the -a option.
 - Usage : hls [-a1] [FILE]...
 
-        ```     
         wilfried@~$ ls -a test
         .  ..  abc  file  File2  file3  folder1  Folder2  folder3  .hidden1  .hidden2  ..hidden3
         wilfried@~$ ./hls -a test
@@ -176,7 +169,6 @@ Repo:<br>
         wilfried@~$ ./hls -a test/folder1
         .  ..  folder1-1  folder1-2  folder1-3
         wilfried@~$  
-        ```
 
 Repo:<br>
 - GitHub repository: holbertonschool-system_linux
@@ -186,7 +178,6 @@ Repo:<br>
 - Implement the -A option.
 - Usage : hls [-A] [FILE]...
 
-        ```
         wilfried@~$ ls -A test
         abc  file  File2  file3  folder1  Folder2  folder3  .hidden1  .hidden2  ..hidden3
         wilfried@~$ ./hls -A test
@@ -194,7 +185,6 @@ Repo:<br>
         wilfried@~$ ./hls -A test/folder1
         folder1-1  folder1-2  folder1-3
         wilfried@~$
-        ```
 
 Repo:<br>
 - GitHub repository: holbertonschool-system_linux
@@ -204,7 +194,6 @@ Repo:<br>
 - Implement the -l option.
 - Usage : hls [-l] [FILE]...
 
-        ```
         wilfried@~$ ls -l test
         total 12
         -rw-rw-r-- 1 wilfried wilfried    0 May  8 00:19 abc
@@ -223,7 +212,6 @@ Repo:<br>
         drwxrwxr-x 2 wilfried wilfried 4096 May  7 15:36 Folder2
         drwxrwxr-x 3 wilfried wilfried 4096 May  7 15:37 folder3
         wilfried@~$
-        ```
 
     - You might notice the total 12 in the first line of ls -l. You can ignore this value for this exercise.
     - Be careful: sometimes user names or group names are not defined
