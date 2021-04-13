@@ -1,20 +1,20 @@
-0x00. C - ls
+# 0x00. C - ls
 Specializations - System programming & Algorithm ― Linux programming
 For this project, we were asked to write our own implementation of the UNIX / Linux ls shell command.
 started 04-12-2021, must end by 04-16-2021
 
-Concepts:
+### Concepts:
     - https://intranet.hbtn.io/concepts/71
 
-Resources:
+### Resources:
     - https://intranet.hbtn.io/rltoken/So9h28IUm8TABkbMn02EiQ
     - man ls
 
-Learning Objectives:
+### Learning Objectives:<br>
     - How does ls work?
     - What are all the functions used by ls?
 
-Requirements:
+### Requirements:
     - Allowed editors: vi, vim, emacs
     - All your files will be compiled on Ubuntu 14.04 LTS
     - Your C programs and functions will be compiled with gcc 4.8.4 using the flags -Wall -Werror -Wextra and -pedantic
@@ -26,7 +26,7 @@ Requirements:
     - Valgrind should show 0 memory leak and 0 error
     - Unless specified otherwise, your program must have the exact same output as ls as well as the exact same error output - except for alignment.
 
-Allowed Functions and System Calls
+### Allowed Functions and System Calls
     - opendir (man 3 opendir)
     - readdir (man 3 readdir)
     - closedir (man 3 closedir)
@@ -45,62 +45,65 @@ Allowed Functions and System Calls
     - getgrgid (man 3 getgrgid)
     - errno (man 3 errno)
 
-Compilation:
+### Compilation:
 Your program must me compiled using GCC & flags:
     - gcc -Wall -Werror -Wextra -pedantic *.c -o hls
 
-Testing
-Your program should give the same result as the real ls:
-$ ls test
-abc  BCD  file  file2  file3  folder1  folder2  folder3
-$ ./hls test
-abc  BCD  file  file2  file3  folder1  folder2  folder3
-$ ls -1
-abc
-BCD
-file
-file2
-file3
-folder1
-folder2
-folder3
-hls
-$ ./hls -1
-abc
-BCD
-file
-file2
-file3
-folder1
-folder2
-folder3
-hls
-$
+### Testing:
+    - Your program should give the same result as the real ls:
 
-Details:
+'''
+        $ ls test
+        abc  BCD  file  file2  file3  folder1  folder2  folder3
+        $ ./hls test
+        abc  BCD  file  file2  file3  folder1  folder2  folder3
+        $ ls -1
+        abc
+        BCD
+        file
+        file2
+        file3
+        folder1
+        folder2
+        folder3
+        hls
+        $ ./hls -1
+        abc
+        BCD
+        file
+        file2
+        file3
+        folder1
+        folder2
+        folder3
+        hls
+        $
+'''
+
+### Details:
 For all tasks of this project, unless explicitly said otherwise:
     - You don’t have to worry about the spacing
     - You don’t have to worry about the sorting
 
 
-Tasks:
-0. Let's start with something simple!
+### Tasks:
+### 0. Let's start with something simple!
     - Create a program that lists the content of the current directory.
-
     - Usage : hls
 
-wilfried@~$ ls
-abc  file  File2  file3  folder1  Folder2  folder3  hls
-wilfried@~$ ./hls
-abc  file  File2  file3  folder1  Folder2  folder3  hls
-wilfried@~$
+'''
+        wilfried@~$ ls
+        abc  file  File2  file3  folder1  Folder2  folder3  hls
+        wilfried@~$ ./hls
+        abc  file  File2  file3  folder1  Folder2  folder3  hls
+        wilfried@~$
+'''
 
 Repo:
     - GitHub repository: holbertonschool-system_linux
     - Directory: 0x00-ls
 
-Tasks:
-1. Maybe some parameters?
+### **1. Maybe some parameters?**
     - Your program should now take one or more file or directory names as parameters.
     - Usage : hls [FILE]...
     - Errors must be printed the same way than ls does:
