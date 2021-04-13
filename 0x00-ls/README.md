@@ -15,16 +15,16 @@
 - What are all the functions used by ls?
 
 ### Requirements:
-    - Allowed editors: vi, vim, emacs
-    - All your files will be compiled on Ubuntu 14.04 LTS
-    - Your C programs and functions will be compiled with gcc 4.8.4 using the flags -Wall -Werror -Wextra and -pedantic
-    - All your files should end with a new line
-    - A README.md file, at the root of the folder of the project is mandatory
-    - Your code should use the Betty style. It will be checked using betty-style.pl and betty-doc.pl
-    - No more than 5 functions per file
-    - All your header files should be include guarded
-    - Valgrind should show 0 memory leak and 0 error
-    - Unless specified otherwise, your program must have the exact same output as ls as well as the exact same error output - except for alignment.
+- Allowed editors: vi, vim, emacs
+- All your files will be compiled on Ubuntu 14.04 LTS
+- Your C programs and functions will be compiled with gcc 4.8.4 using the flags -Wall -Werror -Wextra and -pedantic
+- All your files should end with a new line
+- A README.md file, at the root of the folder of the project is mandatory
+- Your code should use the Betty style. It will be checked using betty-style.pl and betty-doc.pl
+- No more than 5 functions per file
+- All your header files should be include guarded
+- Valgrind should show 0 memory leak and 0 error
+- Unless specified otherwise, your program must have the exact same output as ls as well as the exact same error output - except for alignment.
 
 ### Allowed Functions and System Calls
     - opendir (man 3 opendir)
@@ -46,7 +46,7 @@
     - errno (man 3 errno)
 
 ### Compilation:
-Your program must me compiled using GCC & flags:<br>
+Your program must be compiled using GCC & flags:<br>
     ```
     gcc -Wall -Werror -Wextra -pedantic *.c -o hls
     ```
@@ -167,8 +167,8 @@ Repo:<br>
 - Directory: 0x00-ls
 
 #### 3. Hidden files
-    - Implement the -a option.
-    - Usage : hls [-a1] [FILE]...
+- Implement the -a option.
+- Usage : hls [-a1] [FILE]...
 
         ```     
         wilfried@~$ ls -a test
@@ -185,8 +185,8 @@ Repo:<br>
 - Directory: 0x00-ls
 
 #### 4. Almost all
-    - Implement the -A option.
-    - Usage : hls [-A] [FILE]...
+- Implement the -A option.
+- Usage : hls [-A] [FILE]...
 
         ```
         wilfried@~$ ls -A test
@@ -203,8 +203,8 @@ Repo:<br>
 - Directory: 0x00-ls
 
 #### 5. More details
-    - Implement the -l option.
-    - Usage : hls [-l] [FILE]...
+- Implement the -l option.
+- Usage : hls [-l] [FILE]...
 
         ```
         wilfried@~$ ls -l test
@@ -233,4 +233,3 @@ Repo:<br>
 Repo:<br>
 - GitHub repository: holbertonschool-system_linux
 - Directory: 0x00-ls
-
