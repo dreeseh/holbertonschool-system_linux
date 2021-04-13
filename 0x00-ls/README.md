@@ -1,18 +1,18 @@
 # 0x00. C - ls
-Specializations - System programming & Algorithm ― Linux programming <br>
-For this project, we were asked to write our own implementation of the UNIX / Linux ls shell command.<br>
-started 04-12-2021, must end by 04-16-2021
+- **Specializations - System programming & Algorithm ― Linux programming**<br>
+- For this project, we were asked to write our own implementation of the UNIX / Linux ls shell command.<br>
+- Started **04-12-2021**, must end by **04-16-2021**
 
 ### Concepts:
-[\[EYNTK\] Create your own ls](https://intranet.hbtn.io/concepts/71)
+- [\[EYNTK\] Create your own ls](https://intranet.hbtn.io/concepts/71)
 
 ### Resources:
-[Everything you need to know to write your own ls](https://intranet.hbtn.io/rltoken/So9h28IUm8TABkbMn02EiQ)
-man ls
+- [Everything you need to know to write your own ls](https://intranet.hbtn.io/rltoken/So9h28IUm8TABkbMn02EiQ) <br>
+- man ls
 
 ### Learning Objectives:<br>
-How does ls work?
-What are all the functions used by ls?
+- How does ls work?
+- What are all the functions used by ls?
 
 ### Requirements:
     - Allowed editors: vi, vim, emacs
@@ -84,8 +84,8 @@ Your program should give the same result as the real ls:
 
 ### Details:
 For all tasks of this project, unless explicitly said otherwise:<br>
-    - You don’t have to worry about the spacing
-    - You don’t have to worry about the sorting
+- You don’t have to worry about the spacing
+- You don’t have to worry about the sorting
 
 
 ## Tasks:
@@ -101,19 +101,19 @@ For all tasks of this project, unless explicitly said otherwise:<br>
         wilfried@~$
         ```
 
-**Repo:**<br>
-    - GitHub repository: holbertonschool-system_linux
-    - Directory: 0x00-ls
+Repo:<br>
+- GitHub repository: holbertonschool-system_linux
+- Directory: 0x00-ls
 
 #### **1. Maybe some parameters?**
-    - Your program should now take one or more file or directory names as parameters.
-    - Usage : hls [FILE]...
-    - Errors must be printed the same way than ls does:
+- Your program should now take one or more file or directory names as parameters.
+- Usage : hls [FILE]...
+- Errors must be printed the same way than ls does:
 
-    - In stderr
-    - Starting by hls: (fixed value)
-    - No such file or directory, Permission denied, etc…
-    - Don’t forget the exit value
+- In stderr
+- Starting by hls: (fixed value)
+- No such file or directory, Permission denied, etc…
+- Don’t forget the exit value
 
         ```
         wilfried@~$ ls test
@@ -131,9 +131,9 @@ For all tasks of this project, unless explicitly said otherwise:<br>
         wilfried@~$
         ```
 
-**Repo:**<br>
-    - GitHub repository: holbertonschool-system_linux
-    - Directory: 0x00-ls
+Repo:<br>
+- GitHub repository: holbertonschool-system_linux
+- Directory: 0x00-ls
 
 #### 2. What about options?
 - Implement the -1 option.
@@ -162,9 +162,9 @@ For all tasks of this project, unless explicitly said otherwise:<br>
 
     - Pay attention to “edge cases”: you should be able to handle multiple options, in any order.
 
-**Repo:**<br>
-    - GitHub repository: holbertonschool-system_linux
-    - Directory: 0x00-ls
+Repo:<br>
+- GitHub repository: holbertonschool-system_linux
+- Directory: 0x00-ls
 
 #### 3. Hidden files
     - Implement the -a option.
@@ -180,9 +180,9 @@ For all tasks of this project, unless explicitly said otherwise:<br>
         wilfried@~$  
         ```
 
-**Repo:**<br>
-    - GitHub repository: holbertonschool-system_linux
-    - Directory: 0x00-ls
+Repo:<br>
+- GitHub repository: holbertonschool-system_linux
+- Directory: 0x00-ls
 
 #### 4. Almost all
     - Implement the -A option.
@@ -198,9 +198,9 @@ For all tasks of this project, unless explicitly said otherwise:<br>
         wilfried@~$
         ```
 
-**Repo:**<br>
-    - GitHub repository: holbertonschool-system_linux
-    - Directory: 0x00-ls
+Repo:<br>
+- GitHub repository: holbertonschool-system_linux
+- Directory: 0x00-ls
 
 #### 5. More details
     - Implement the -l option.
@@ -230,7 +230,7 @@ For all tasks of this project, unless explicitly said otherwise:<br>
     - You might notice the total 12 in the first line of ls -l. You can ignore this value for this exercise.
     - Be careful: sometimes user names or group names are not defined
 
-**Repo:**<br>
-    - GitHub repository: holbertonschool-system_linux
-    - Directory: 0x00-ls
+Repo:<br>
+- GitHub repository: holbertonschool-system_linux
+- Directory: 0x00-ls
 
