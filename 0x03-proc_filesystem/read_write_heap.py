@@ -5,7 +5,8 @@ import sys
 
 
 def main():
-    """ a script that finds a string in the heap of a running process, and replaces it
+    """ a script that finds a string in the heap
+    of a running process, and replaces it
     """
     if len(sys.argv) != 4:
         print("Usage: read_write_heap.py pid search_string replace_string")
@@ -33,7 +34,7 @@ def main():
         if "heap" in line:
             heap_found = True
             print("found HEAP")
-            
+
             memory_range = s_line[0].split('-')
             memory_start = int(memory_range[0], 16)
             memory_end = int(memory_range[1], 16)
@@ -44,8 +45,6 @@ def main():
             if index_search == -1:
                 print("break one")
                 break
-
-        
 
             memory_file.seek(memory_start + index_search)
             memory_file.write(bytes(write_string, "ASCII"))
