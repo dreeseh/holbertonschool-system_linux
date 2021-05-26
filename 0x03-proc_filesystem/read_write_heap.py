@@ -6,9 +6,15 @@ contains the main method
 import sys
 
 
+def print_usage_and_exit():
+    """
+    module for printing usage
+    """
+    print('Usage: {} pid search write'.format(sys.argv[0]))
+    sys.exit(1)
+
 if len(sys.argv) != 4:
-    print("Usage: read_write_heap.py pid search_string replace_string")
-    exit(1)
+    print_usage_and_exit()
 
 pid = int(sys.argv[1])
 search_string = sys.argv[2]
