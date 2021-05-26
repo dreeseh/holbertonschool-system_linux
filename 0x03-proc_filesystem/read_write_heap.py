@@ -1,6 +1,8 @@
 #!/usr/bin/python3
-""" contains the main method
 """
+contains the main method
+"""
+
 import sys
 
 
