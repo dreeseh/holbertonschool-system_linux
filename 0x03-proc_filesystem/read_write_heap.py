@@ -55,3 +55,4 @@ if not heap_found:
     exit(1)
 
 print("now replacing string in memory: /proc/{}/mem".format(pid))
+break
