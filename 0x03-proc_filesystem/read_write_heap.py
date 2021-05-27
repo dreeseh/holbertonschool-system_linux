@@ -1,7 +1,7 @@
-#!/usr/bin/python3
-"""
+#!/usr/bin/env python3
+'''
 contains the main method
-"""
+'''
 
 import sys
 
@@ -63,4 +63,3 @@ if not heap_found:
     exit(1)
 
 print("now replacing string in memory: /proc/{}/mem".format(pid))
-break
