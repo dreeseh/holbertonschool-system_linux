@@ -20,7 +20,7 @@ pid = int(sys.argv[1])
 search_string = sys.argv[2]
 write_string = str(sys.argv[3])
 if write_string == "":
-    print_usage_and_exit()
+    write_string = "   "
 
 try:
     file_maps = open("/proc/{}/maps".format(pid), 'r')
