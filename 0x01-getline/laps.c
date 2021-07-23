@@ -15,6 +15,7 @@ void race_state(int *id, size_t size)
 	{
 		while (cars)
             cars = cars->next;
+            next = cars->next;
             free(cars);
 		return;
 	}
