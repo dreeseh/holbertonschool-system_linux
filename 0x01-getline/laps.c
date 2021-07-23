@@ -1,7 +1,7 @@
 #include "laps.h"
 
 /**
- * race_state - a function that keeps track of the number of laps made by several cars in a race
+ * race_state - tracks the number of laps made by cars in a race
  * @id: an array of int representing the “identifier” of each car
  * @size: is the size of this array
  * Return: is void
@@ -13,20 +13,18 @@ void race_state(int *id, size_t size)
 
 	if (!size) /* if size is 0, reset cars list */
 	{
-		while (cars)
-            cars = cars->next;
+        while (cars)
+            cars = next;
             next = cars->next;
             free(cars);
 		return;
 	}
-
 	for (; size--; id++) /* Loop through all ids */
 	{
 		/* For each id, stop when *id <= current node or list is done */
 		for (prev = NULL, next = cars; next; prev = next, next = next->next)
 			if (*id <= next->id)
 				break;
-
 		if (next && *id == next->id) /* If id found, increment laps */
 		{
 			next->laps += 1;
