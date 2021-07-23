@@ -11,7 +11,7 @@ void race_state(int *id, size_t size)
 	static car_t *cars;
 	car_t *next, *prev, *new;
 
-	if (!size) /* if size is 0, reset cars list */
+	if (size == 0) /* if size is 0, reset cars list */
 	{
         while (cars)
             cars = cars->next;
