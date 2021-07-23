@@ -14,7 +14,7 @@ void race_state(int *id, size_t size)
 	if (size == 0) /* if size is 0, reset cars list */
 	{
         while (cars)
-            cars = cars->next;
+            next = cars;
             next = cars->next;
             free(cars);
 		return;
