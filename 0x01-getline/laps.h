@@ -5,7 +5,7 @@
 #include <stdlib.h>
 
 /**
- * struct car - singly-linked list
+ * struct car_s - singly-linked list
  * @id: the car's ID number
  * @laps: number of laps completed
  * @next: pointer to the next node
@@ -13,8 +13,8 @@
 typedef struct car_s
 {
 	int id;
-	int laps;
-	struct car_s *next;
+    int laps;
+    struct car_s *next;
 } car_t;
 
 /** Prototypes **/
