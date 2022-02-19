@@ -1,0 +1,1 @@
+index of 0x02. C - Static variables, getline
