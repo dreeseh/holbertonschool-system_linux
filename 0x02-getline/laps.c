@@ -12,13 +12,13 @@ void race_state(int *id, size_t size)
 	car_t *next, *prev, *new;
 
 	if (size == 0) /* if size is 0, reset cars list */
-	{
 		while (cars)
+		{
 			next = cars;
 			next = cars->next;
 			free(cars);
 			return;
-	}
+		}
 	for (; size--; id++) /* Loop through all ids */
 	{
 		/* For each id, stop when *id <= current node or list is done */
