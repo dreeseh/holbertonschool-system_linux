@@ -13,14 +13,13 @@
  */
 typedef struct car_s
 {
-	int id;
-	int laps;
+	int car_id;
+	size_t laps;
 	struct car_s *next;
 } car_t;
 
 /* Prototypes */
 void race_state(int *id, size_t size);
-car_t *car_init(int id, car_t *next);
-void free_car_list(car_t **cars);
+void insert_car(car_t **head, int id);
 
 #endif /*_LAPS_HEADER_*/
