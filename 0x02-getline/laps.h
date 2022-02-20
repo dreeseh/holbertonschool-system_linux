@@ -7,7 +7,7 @@
 /* struct for cars */
 /**
  * struct car_s - singly-linked list
- * @id: the car's ID number
+ * @car_id: the car's ID number
  * @laps: number of laps completed
  * @next: pointer to the next node
  */
