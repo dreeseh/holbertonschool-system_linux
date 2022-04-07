@@ -3,7 +3,7 @@ BITS 64
 global asm_strcmp
 
 section .text
-strcmp:
+asm_strcmp:
         push    rbp
         mov     rbp, rsp
         mov     QWORD [rbp-8], rdi
