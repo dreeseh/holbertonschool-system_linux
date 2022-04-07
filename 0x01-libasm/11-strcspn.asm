@@ -1,8 +1,8 @@
 	BITS 64
 	
-	global	asm_strcspn
+	global asm_strcspn
 
-	section	.text
+	section .text
 
 asm_strcspn:
 	push	rbp
