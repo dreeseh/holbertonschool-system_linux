@@ -1,8 +1,8 @@
 	BITS 64
 	
-	global asm_strcspn
+	global	asm_strcspn
 
-	section .text
+	section	.text
 
 asm_strcspn:
 	push	rbp
@@ -16,13 +16,13 @@ asm_strcspn:
 	xor	r9,	r9
 
 loop_rdi:
-	mov	r8b,	[rdi + rax]
+	mov	r8b, [rdi + rax]
 	test	r8b,	r8b
 	jz	out
 	xor	rcx,	rcx
 
 loop_rsi:
-	mov	r9b,	[rsi + rcx]
+	mov	r9b, [rsi + rcx]
 	test	r9b,	r9b
 	jz	break
 	cmp	r8b,	r9b
