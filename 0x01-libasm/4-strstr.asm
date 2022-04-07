@@ -2,7 +2,7 @@
 	
 	global asm_strstr
 
-	section .text
+	section	.text
 
 asm_strstr:
 	push	rbp
@@ -51,3 +51,4 @@ out:
 	mov	rsp,	rbp
 	pop	rbp
 	ret
+	
