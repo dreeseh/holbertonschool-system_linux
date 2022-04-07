@@ -1,14 +1,9 @@
-BITS 64
-	global asm_strcmp
-	section .text
-
-asm_strcmp
-	push rbp
-	mov rbp, rsp
-	push rdx
-
-	xor rcx, rcx
-
+strcmp:
+        push    rbp
+        mov     rbp, rsp
+        mov     QWORD PTR [rbp-8], rdi
+        mov     QWORD PTR [rbp-16], rsi
+        jmp     .L2
 .L5:
         mov     rax, QWORD PTR [rbp-8]
         movzx   edx, BYTE PTR [rax]
