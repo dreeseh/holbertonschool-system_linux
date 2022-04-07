@@ -1,5 +1,5 @@
 	BITS 64
-	
+
 	global asm_strcspn
 
 	section .text
