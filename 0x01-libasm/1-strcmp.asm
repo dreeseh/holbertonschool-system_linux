@@ -1,3 +1,8 @@
+BITS 64
+
+global asm_strcmp
+
+section .text
 strcmp:
         push    rbp
         mov     rbp, rsp
