@@ -1,5 +1,5 @@
 	BITS 64
-	
+
 	global asm_strstr
 
 	section	.text
@@ -51,4 +51,3 @@ out:
 	mov	rsp,	rbp
 	pop	rbp
 	ret
-	
