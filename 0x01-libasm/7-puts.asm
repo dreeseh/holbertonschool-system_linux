@@ -8,7 +8,7 @@
 
 asm_puts:
 	push	rbp
-	mov		rbp,	rsp
+	mov	rbp,	rsp
 	push	rdi
 
 	call	asm_strlen
