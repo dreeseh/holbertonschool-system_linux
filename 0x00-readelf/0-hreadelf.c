@@ -6,6 +6,7 @@
  * main - entry point for program
  * @argc: arg count
  * @argv: args vector
+ * @env: environment variable
  * Return: -1 on fail and 0 upon success
  */
 int main(int argc, char **argv, char **env)
