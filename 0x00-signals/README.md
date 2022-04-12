@@ -1,9 +1,9 @@
 0x00. C - Signals
 
-Learning Objectives
+Learning Objectives:
 At the end of this project, you are expected to be able to explain to anyone, without the help of Google:
 
-General
+General:
 What is a signal
 Why do they exist
 When are they delivered and by whom
@@ -12,8 +12,8 @@ How to set up a handler for a signal
 How to send signals
 What signals can’t be caught
 
-Requirements
-General
+Requirements:
+General:
 Allowed editors: vi, vim, emacs
 All your files will be compiled on Ubuntu 14.04 LTS
 Your C programs and functions will be compiled with gcc 4.8.4 using the flags -Wall -Werror -Wextra and -pedantic
@@ -25,5 +25,5 @@ The prototypes of all your functions should be included in your header file call
 Don’t forget to push your header file
 All your header files should be include guarded
 
-Allowed functions and system calls
+Allowed functions and system calls:
 Unless specified otherwise in a task, you are allowed to use the C standard library
