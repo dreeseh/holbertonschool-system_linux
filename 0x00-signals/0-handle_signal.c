@@ -11,7 +11,7 @@ void signal_handler(int sig_num)
 }
 
 /**
- * handle_signal - 
+ * handle_signal - signal handler
  * Return: 0 on success, or -1 on error
  */
 int handle_signal(void)
