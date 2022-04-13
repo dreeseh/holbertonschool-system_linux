@@ -2,6 +2,7 @@
 
 /**
  * signal_handler - handles SIGINT signal
+ * @sig_num: prints signal number
  * Return: is void
  */
 void signal_handler(int sig_num)
@@ -18,6 +19,6 @@ int handle_signal(void)
 {
 	if (signal(SIGINT, signal_handler) == SIG_ERR)
 		return (-1);
-	
+
 	return (0);
 }
