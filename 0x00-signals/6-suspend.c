@@ -8,6 +8,7 @@
 void print_caught(int sig_num)
 {
 	printf("Caught %d\n", sig_num);
+	printf("Signal Received\n");
 	fflush(stdout);
 }
 
@@ -22,6 +23,5 @@ int main(void)
 	sig_action.sa_handler = print_caught;
 	sigaction(SIGINT, &sig_action, NULL);
 	pause();
-	puts("Signal Received");
 	return (EXIT_SUCCESS);
 }
