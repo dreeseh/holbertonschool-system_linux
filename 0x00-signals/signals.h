@@ -27,4 +27,7 @@ void (*current_handler_sigaction(void))(int);
 /*	task 4		*/
 int trace_signal_sender(void);
 
+/*	task 10		*/
+int pid_exist(pid_t pid);
+
 #endif /** _SIGNALS_H_ **/
