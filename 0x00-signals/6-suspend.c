@@ -8,6 +8,7 @@
 void print_caught(int sig_num)
 {
 	printf("Caught %d\n", sig_num);
+	fflush(stdout);
 }
 
 /**
