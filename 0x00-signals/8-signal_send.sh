@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 #sends the signal SIGQUIT to a process, given its PID
 
 if [ "$#" -ne 1 ];
