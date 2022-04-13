@@ -1,7 +1,7 @@
 #!/usr/bin/env sh
 #sends the signal SIGQUIT to a process, given its PID
 
-if [ $# -ne 1 ];
+if [ "$#" -ne 1 ];
 then
 	echo "Usage: $0 <pid>"
 	exit 1
