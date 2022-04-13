@@ -1,8 +1,10 @@
 #include "signals.h"
 
 /**
- * @brief 
- * 
+ * main - program entry
+ * @argc: args count
+ * @argv: args vector
+ * Return: EXIT_SUCCESS | EXIT_FAILURE
  */
 int main(int argc, char **argv)
 {
