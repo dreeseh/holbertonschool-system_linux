@@ -2,7 +2,7 @@
 
 /**
  * print_hello - receives signal
- * @sig: the signal number received
+ * @sig_num: the signal number received
  */
 void print_hello(int sig_num)
 {
