@@ -8,7 +8,7 @@
 void print_caught(int sig_num)
 {
 	printf("Caught %d\n", sig_num);
-	printf("Signal Received\n");
+	printf("Signal received\n");
 	fflush(stdout);
 }
 
