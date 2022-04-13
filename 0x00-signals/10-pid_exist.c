@@ -1,6 +1,8 @@
 #include <sys/types.h>
 #include <signal.h>
 
+int pid_exist(pid_t pid);
+
 /**
  * pid_exist - tests if a process exists, given its PID
  * @pid: the PID we care checking
