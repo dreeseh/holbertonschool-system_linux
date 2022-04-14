@@ -1,7 +1,7 @@
 #include "signals.h"
 
 /**
- * signals_block - blocks a given set of signals
+ * _signals_block - blocks a given set of signals
  * @signals: a 0-terminated array of int
  * Return: 0 on success, or -1 on error
  */
