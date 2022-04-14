@@ -33,4 +33,7 @@ int pid_exist(pid_t pid);
 /*	task 12		*/
 void all_in_one(void);
 
+/*	task 13		*/
+int sigset_init(sigset_t *set, int *signals);
+
 #endif /** _SIGNALS_H_ **/
