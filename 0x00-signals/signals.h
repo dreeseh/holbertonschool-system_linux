@@ -30,4 +30,7 @@ int trace_signal_sender(void);
 /*	task 10		*/
 int pid_exist(pid_t pid);
 
+/*	task 12		*/
+void all_in_one(void);
+
 #endif /** _SIGNALS_H_ **/

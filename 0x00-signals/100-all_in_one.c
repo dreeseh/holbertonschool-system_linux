@@ -26,9 +26,6 @@ void all_in_one(void)
 
 	sig_action.sa_flags = SA_SIGINFO;
 	sig_action.sa_sigaction = all_in_one_sigHandler;
-	while (sig <= SIGRTMAX)
-	{
+	for ( ; sig <= SIGRTMAX ; sig++)
 		sigaction(sig, &sig_action, NULL);
-		sig++;
-	}
 }
