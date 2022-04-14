@@ -39,4 +39,8 @@ int sigset_init(sigset_t *set, int *signals);
 /*	task 14		*/
 int signals_block(int *signals);
 
+/*	task 15		*/
+int signals_unblock(int *signals);
+int _signals_block(int *signals);
+
 #endif /** _SIGNALS_H_ **/
