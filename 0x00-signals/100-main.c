@@ -11,15 +11,15 @@
  */
 int main(void)
 {
-    pid_t pid;
+	pid_t pid;
 
-    all_in_one();
+	all_in_one();
 
-    pid = getpid();
-    printf("PID: %d\n", (int)pid);
-    while (98)
-    {
-        sleep(2);
-    }
-    return (EXIT_SUCCESS);
+	pid = getpid();
+	printf("PID: %d\n", (int)pid);
+	while (98)
+	{
+		sleep(2);
+	}
+	return (EXIT_SUCCESS);
 }
