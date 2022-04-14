@@ -36,4 +36,7 @@ void all_in_one(void);
 /*	task 13		*/
 int sigset_init(sigset_t *set, int *signals);
 
+/*	task 14		*/
+int signals_block(int *signals);
+
 #endif /** _SIGNALS_H_ **/
