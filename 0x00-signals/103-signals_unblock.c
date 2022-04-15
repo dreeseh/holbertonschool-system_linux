@@ -4,7 +4,7 @@
 int sigset_init(sigset_t *set, int *signals);
 
 /**
- * signals_block - blocks a given set of signals
+ * signals_unblock - blocks a given set of signals
  * @signals: a 0-terminated array of int
  * Return: 0 on success, or -1 on error
  */
