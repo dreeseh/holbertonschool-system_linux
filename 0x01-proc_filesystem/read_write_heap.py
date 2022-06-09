@@ -1,5 +1,6 @@
 #!/usr/bin/python3
-"""a script that finds a string
+"""
+a script that finds a string
 in the heap of a running process,
 and replaces it
 """
