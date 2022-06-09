@@ -9,7 +9,8 @@ import sys
 
 
 def print_usage_and_exit():
-    print('Usage: {} pid search write'.format(sys.argv[0]))
+    print('Usage: {} read_write_heap.py pid search_string replace_string'.
+          format(sys.argv[0]))
     sys.exit(1)
 
 
@@ -116,5 +117,5 @@ for line in maps_file:
     # there is only one heap in our example
     break
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
