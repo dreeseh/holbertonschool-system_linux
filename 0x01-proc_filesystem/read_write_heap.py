@@ -36,43 +36,56 @@ def main():
         print(e)
         sys.exit(1)
 
-    try:
-        memory_file = open("/proc/{}/mem".format(pid), 'r+b', 0)
-    except Exception as e:
-        print(e)
-        sys.exit(1)
-
-    heap_found = False
     for line in map_file:
-        s_line = line.split(' ')
-        if "heap" in line:
-            heap_found = True
-            print("found HEAP")
+        split_line = line.split(' ')
+        if split_line[-1][:-1] != "[heap]":
+            continue
+        mem_addr = split_line[0]
+        perms = split_line[1]
+        offset = split_line[2]
+        device = split_line[3]
+        inode = split_line[4]
+        pathname = split_line[-1][:-1]
 
-            memory_range = s_line[0].split('-')
-            memory_start = int(memory_range[0], 16)
-            memory_end = int(memory_range[1], 16)
-            memory_file.seek(memory_start)
-            memory_search = memory_file.read(memory_end - memory_start)
-            index_search = memory_search.find(bytes(search_string, 'ASCII'))
+        if perms[0] != 'r' or perms[1] != 'w':
+            print('{} does not have read/write permission'.format(pathname))
+            raise PermissionError
 
-            if index_search == -1:
-                print("break one")
-                break
+        address = mem_addr.split('-')
+        if len(address) != 2:
+            print('Wrong address format')
+            map_file.close()
+            sys.exit(1)
 
-            memory_file.seek(memory_start + index_search)
-            memory_file.write(bytes(write_string, "ASCII"))
-            print("write memory break")
-            break
+        addr_start = int(address[0], 16)
+        addr_end = int(address[1], 16)
 
-    map_file.close()
-    memory_file.close()
+        try:
+            mem_file = open("/proc/{}/mem".format(pid), 'r+b', 0)
+        except Exception as e:
+            print(e)
+            sys.exit(1)
 
-    if not heap_found:
-        print("heap not found")
-        sys.exit(1)
+        mem_file.seek(addr_start)
+        heap = mem_file.read(addr_end - addr_start)
 
-    print("now replacing string in memory: /proc/{}/mem".format(pid))
+        try:
+            i = heap.index(bytes(search_string, 'ASCII'))
+        except Exception:
+            print("Can't find '{}'".format(search_string))
+            map_file.close()
+            mem_file.close()
+            exit(1)
+
+        print("changing '{}' to '{}' in {}:"
+              .format(search_string, write_string, pid))
+        mem_file.seek(addr_start + i)
+        mem_file.write(bytes(write_string + '\0', 'ASCII'))
+        if len(write_string) > 0:
+            print("String changed!")
+        map_file.close()
+        mem_file.close()
+        break
 
 
 if __name__ == '__main__':
