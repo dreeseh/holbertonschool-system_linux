@@ -4,8 +4,6 @@ a script that finds a string
 in the heap of a running process,
 and replaces it
 """
-
-
 import sys
 
 
