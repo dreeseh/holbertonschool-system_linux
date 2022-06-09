@@ -18,10 +18,16 @@ if len(sys.argv) != 4:
     print_usage_and_exit()
 
 pid = int(sys.argv[1])
-search_string = sys.argv[2]
+if pid <= 0:
+    print_usage_and_exit()
+
+search_string = str(sys.argv[2])
+if search_string  == "":
+    print_usage_and_exit()
+
 write_string = str(sys.argv[3])
-if write_string == "":
-    write_string = "   "
+if search_string  == "":
+    print_usage_and_exit()
 
 try:
     file_maps = open("/proc/{}/maps".format(pid), 'r')
