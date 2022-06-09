@@ -4,30 +4,28 @@ in the heap of a running process,
 and replaces it
 """
 
+
 import sys
 
 
-def print_usage_exit():
-    """prints usage error and exits
-    """
+def usage_error_exit():
+    """Print usage error and exit"""
     print("Usage:{} pid search_string replace_string".format(sys.argv[0]))
     sys.exit(1)
 
 
 if len(sys.argv) != 4:
-    print_usage_exit()
-
+    usage_error_exit()
 search_string = str(sys.argv[2])
 replace_string = str(sys.argv[3])
 if search_string == "":
-    print_usage_exit()()
+    usage_error_exit()
 try:
     pid = int(sys.argv[1])
     if pid <= 0:
-        print_usage_exit()()
+        usage_error_exit()
 except:
-    print_usage_exit()()
-
+    usage_error_exit()
 map_file_str = "/proc/{}/maps".format(pid)
 print("[*] maps: {}".format(map_file_str))
 mem_file_str = "/proc/{}/mem".format(pid)
@@ -67,13 +65,15 @@ try:
     head_addr = int(addresses[0], 16)
     tail_addr = int(addresses[1], 16)
     print("[*] Addr start [{}] | end [{}]".format(head_addr, tail_addr))
-except ValueError("wrong address value"):
+except:
+    raise ValueError("wrong address value")
     map_file.close()
     exit(1)
 
 try:
     mem_file = open(mem_file_str, mode='rb+')
-except IOError("can not open file {}".format(mem_file_str)):
+except:
+    raise IOError("can not open file {}".format(mem_file_str))
     map_file.close()
     exit(1)
 
