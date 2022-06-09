@@ -1,65 +1,66 @@
 #!/usr/bin/python3
+"""contains the main method
 """
-Hack VM
-"""
+
 import sys
 
 
-def main():
-    """replace words"""
-    if len(sys.argv) != 4:
-        print("Usage:read_write_heap.py pid search_string replace_string")
-        exit(1)
-    pid = sys.argv[1]
-    sSearch = sys.argv[2]
-    Rstring = sys.argv[3]
+def print_usage_and_exit():
+    """module for printing usage
+    """
+    print('Usage: {} pid search write'.format(sys.argv[0]))
+    sys.exit(1)
 
-    if len(Rstring) > len(sSearch):
-        exit(1)
 
-    try:
-        maps_file = open("/proc/{}/maps".format(pid), 'r')
-    except Exception as e:
-        print(e)
-        exit(1)
+if len(sys.argv) != 4:
+    print_usage_and_exit()
 
-    try:
-        mem_file = open("/proc/{}/mem".format(pid), 'r+b', 0)
-    except Exception as e:
-        maps_file.close()
-        print(e)
-        exit(1)
+pid = int(sys.argv[1])
+search_string = sys.argv[2]
+write_string = str(sys.argv[3])
+if write_string == "":
+    write_string = "   "
 
-    heap_found = False
-    for line in maps_file.readlines():
-        s_line = line.split()
-        if s_line[len(s_line) - 1] == "[heap]":
-            heap_found = True
-            range_mem = s_line[0].split('-')
-            start = int(range_mem[0], 16)
-            end = int(range_mem[1], 16)
-            mem_file.seek(start)
-            s = mem_file.read(end - start)
-            index_sSearch = s.find(bytes(sSearch, 'utf-8'))
+try:
+    file_maps = open("/proc/{}/maps".format(pid), 'r')
+except Exception as e:
+    print(e)
+    exit(1)
 
-            if index_sSearch == -1:
-                break
+try:
+    memory_file = open("/proc/{}/mem".format(pid), 'r+b', 0)
+except Exception as e:
+    print(e)
+    exit(1)
 
-            mem_file.seek(start + index_sSearch)
-            mem_file.write(bytes(Rstring, 'utf-8') + b'\x00')
+heap_found = False
+for line in file_maps:
+    s_line = line.split(' ')
+    if "heap" in line:
+        heap_found = True
+        print("found HEAP")
+
+        memory_range = s_line[0].split('-')
+        memory_start = int(memory_range[0], 16)
+        memory_end = int(memory_range[1], 16)
+        memory_file.seek(memory_start)
+        memory_search = memory_file.read(memory_end - memory_start)
+        index_search = memory_search.find(bytes(search_string, 'ASCII'))
+
+        if index_search == -1:
+            print("break one")
             break
 
-    maps_file.close()
-    mem_file.close()
+        memory_file.seek(memory_start + index_search)
+        memory_file.write(bytes(write_string, "ASCII"))
+        print("write memory break")
+        break
 
-    if index_sSearch == -1:
-        exit(1)
+file_maps.close()
+memory_file.close()
 
-    if not heap_found:
-        exit(1)
+if not heap_found:
+    print("heap not found")
+    exit(1)
 
-    print("replacting string in mem: /proc/{}/mem".format(pid))
-
-
-if __name__ == "__main__":
-    main()
+print("now replacing string in memory: /proc/{}/mem".format(pid))
