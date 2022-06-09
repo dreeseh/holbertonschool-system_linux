@@ -19,8 +19,8 @@ def main():
     if pid <= 0:
         print_usage()
     search_string = str(sys.argv[2])
-    write_string = str(sys.argv[3])
-    if len(write_string) > len(search_string):
+    replace_string = str(sys.argv[3])
+    if len(replace_string) > len(replace_string):
         raise IndexError
 
     map_file_name = '/proc/{}/maps'.format(pid)
@@ -75,10 +75,10 @@ def main():
             exit(1)
 
         print("changing '{}' to '{}' in {}:"
-              .format(search_string, write_string, pid))
+              .format(search_string, replace_string, pid))
         mem_file.seek(addr_start + i)
-        mem_file.write(bytes(write_string + '\0', 'ASCII'))
-        if len(write_string) > 0:
+        mem_file.write(bytes(replace_string + '\0', 'ASCII'))
+        if len(replace_string) > 0:
             print("String changed!")
         map_file.close()
         mem_file.close()
