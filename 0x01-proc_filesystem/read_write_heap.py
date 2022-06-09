@@ -75,7 +75,7 @@ def main():
             print("Can't find '{}'".format(search_string))
             map_file.close()
             mem_file.close()
-            exit(1)
+            sys.exit(1)
 
         print("changing '{}' to '{}' in {}:"
               .format(search_string, write_string, pid))
