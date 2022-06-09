@@ -81,16 +81,16 @@ def main():
             print("Can't find '{}'".format(search_string))
             map_file.close()
             mem_file.close()
-            exit(1)
+            exit(0)
 
-        print("changing '{}' to '{}' in {}:"
-              .format(search_string, replace_string, pid))
+        print("[*] Writing '{}' at {:x}"
+              .format(replace_string, addr_start + i))
         mem_file.seek(addr_start + i)
-        mem_file.write(bytes(replace_string + '\0', 'ASCII'))
-        if len(replace_string) > 0:
-            print("String changed!")
+        mem_file.write(bytes(replace_string, "ASCII"))
+
         map_file.close()
         mem_file.close()
+
         break
 
 
