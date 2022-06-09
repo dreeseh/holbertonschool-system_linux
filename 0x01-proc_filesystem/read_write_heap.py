@@ -26,9 +26,9 @@ def main():
         print_usage()
 
     map_file_name = '/proc/{}/maps'.format(pid)
-    print("[*] maps: {}".format(maps_filename))
+    print("[*] maps: {}".format(map_file_name))
     mem_file_name = '/proc/{}/mem'.format(pid)
-    print("[*] mem: {}".format(mem_filename))
+    print("[*] mem: {}".format(mem_file_name))
 
     try:
         map_file = open('/proc/{}/maps'.format(pid), 'r')
