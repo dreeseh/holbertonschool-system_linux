@@ -33,13 +33,13 @@ try:
     file_maps = open("/proc/{}/maps".format(pid), 'r')
 except Exception as e:
     print(e)
-    exit(1)
+    sys.exit(1)
 
 try:
     memory_file = open("/proc/{}/mem".format(pid), 'r+b', 0)
 except Exception as e:
     print(e)
-    exit(1)
+    sys.exit(1)
 
 heap_found = False
 for line in file_maps:
@@ -69,6 +69,6 @@ memory_file.close()
 
 if not heap_found:
     print("heap not found")
-    exit(1)
+    sys.exit(1)
 
 print("now replacing string in memory: /proc/{}/mem".format(pid))
