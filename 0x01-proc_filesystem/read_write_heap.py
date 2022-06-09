@@ -26,18 +26,24 @@ def main():
         print_usage()
 
     map_file_name = '/proc/{}/maps'.format(pid)
+    print("[*] maps: {}".format(maps_filename))
     mem_file_name = '/proc/{}/mem'.format(pid)
+    print("[*] mem: {}".format(mem_filename))
 
     try:
         map_file = open('/proc/{}/maps'.format(pid), 'r')
     except IOError as e:
         print('[ERROR] Cannot open file {}'.format(map_file_name))
+        print("        I/O error({}): {}".format(e.errno, e.strerror))
         sys.exit(1)
 
     for line in map_file:
         split_line = line.split(' ')
+
         if split_line[-1][:-1] != "[heap]":
             continue
+        print("[*] Found [heap]:")
+
         mem_addr = split_line[0]
         perms = split_line[1]
         offset = split_line[2]
@@ -47,7 +53,8 @@ def main():
 
         if perms[0] != 'r' or perms[1] != 'w':
             print('{} does not have read/write permission'.format(pathname))
-            raise PermissionError
+            map_file.close()
+            exit(0)
 
         address = mem_addr.split('-')
         if len(address) != 2:
