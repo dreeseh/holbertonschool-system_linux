@@ -13,6 +13,7 @@ def print_usage_and_exit():
     print('Usage: {} pid search write'.format(sys.argv[0]))
     sys.exit(1)
 
+
 if len(sys.argv) != 4:
     print_usage_and_exit()
 
