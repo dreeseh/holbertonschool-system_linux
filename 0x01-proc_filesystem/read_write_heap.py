@@ -8,94 +8,107 @@ and replaces it
 import sys
 
 
-def usage_error_exit():
-    """Print usage error and exit"""
-    print("Usage:{} pid search_string replace_string".format(sys.argv[0]))
+def print_usage_and_exit():
+    print('Usage: {} pid search write'.format(sys.argv[0]))
     sys.exit(1)
 
 
+# check usage
 if len(sys.argv) != 4:
-    usage_error_exit()
+    print_usage_and_exit()
+
+# get the pid from args
+pid = int(sys.argv[1])
+if pid <= 0:
+    print_usage_and_exit()
 search_string = str(sys.argv[2])
-replace_string = str(sys.argv[3])
 if search_string == "":
-    usage_error_exit()
-try:
-    pid = int(sys.argv[1])
-    if pid <= 0:
-        usage_error_exit()
-except:
-    usage_error_exit()
-map_file_str = "/proc/{}/maps".format(pid)
-print("[*] maps: {}".format(map_file_str))
-mem_file_str = "/proc/{}/mem".format(pid)
-print("[*] mem: {}".format(mem_file_str))
+    print_usage_and_exit()
+write_string = str(sys.argv[3])
+if write_string == "":
+    print_usage_and_exit()
 
+# open the maps and mem files of the process
+maps_filename = "/proc/{}/maps".format(pid)
+print("[*] maps: {}".format(maps_filename))
+mem_filename = "/proc/{}/mem".format(pid)
+print("[*] mem: {}".format(mem_filename))
+
+# try opening the maps file
 try:
-    map_file = open(map_file_str, mode='r')
-except:
-    raise IOError("can not open file {}".format(map_file_str))
+    maps_file = open('/proc/{}/maps'.format(pid), 'r')
+except IOError as e:
+    print("[ERROR] Can not open file {}:".format(maps_filename))
+    print("        I/O error({}): {}".format(e.errno, e.strerror))
     sys.exit(1)
-for read_line in map_file:
-    phrase = read_line.split(' ')
-    memory_address = phrase[0]
-    permissions = phrase[1]
-    offset = phrase[2]
-    inode = phrase[4]
-    pathname = phrase[-1][:-1]
-    if pathname == "[heap]":
-        break
-print("[*] Found [heap]:")
-print("\tpathname = {}".format(pathname))
-print("\taddresses = {}".format(memory_address))
-print("\tpermissions = {}".format(permissions))
-print("\toffset = {}".format(offset))
-print("\tinode = {}".format(inode))
-if permissions[0] != 'r' or permissions[1] != 'w':
-    print("{} does not have read/write permission".format(pathname))
-    map_file.close()
-    exit(1)
 
-addresses = memory_address.split("-")
-if len(addresses) != 2:
-    print("wrong address format")
-    map_file.close()
-    exit(1)
-try:
-    head_addr = int(addresses[0], 16)
-    tail_addr = int(addresses[1], 16)
-    print("[*] Addr start [{}] | end [{}]".format(head_addr, tail_addr))
-except:
-    raise ValueError("wrong address value")
-    map_file.close()
-    exit(1)
+for line in maps_file:
+    sline = line.split(' ')
+    # check if we found the heap
+    if sline[-1][:-1] != "[heap]":
+        continue
+    print("[*] Found [heap]:")
 
-try:
-    mem_file = open(mem_file_str, mode='rb+')
-except:
-    raise IOError("can not open file {}".format(mem_file_str))
-    map_file.close()
-    exit(1)
+    # parse line
+    addr = sline[0]
+    perm = sline[1]
+    offset = sline[2]
+    device = sline[3]
+    inode = sline[4]
+    pathname = sline[-1][:-1]
+    print("\tpathname = {}".format(pathname))
+    print("\taddresses = {}".format(addr))
+    print("\tpermisions = {}".format(perm))
+    print("\toffset = {}".format(offset))
+    print("\tinode = {}".format(inode))
 
-mem_file.seek(head_addr)
-heap = mem_file.read(tail_addr - head_addr)
-try:
-    h_index = heap.index(bytes(search_string, "ASCII"))
-except Exception:
-    print("can not find {}".format(search_string))
-    map_file.close()
+    # check if there is read and write permission
+    if perm[0] != 'r' or perm[1] != 'w':
+        print("[*] {} does not have read/write permission".format(pathname))
+        maps_file.close()
+        exit(0)
+
+    # get start and end of the heap in the virtual memory
+    addr = addr.split("-")
+    if len(addr) != 2:
+        print("[*] Wrong addr format")
+        maps_file.close()
+        exit(1)
+    addr_start = int(addr[0], 16)
+    addr_end = int(addr[1], 16)
+    print("\tAddr start [{:x}] | end [{:x}]".format(addr_start, addr_end))
+
+    # open and read mem
+    try:
+        mem_file = open(mem_filename, 'rb+')
+    except IOError as e:
+        print("[ERROR] Can not open file {}:".format(mem_filename))
+        print("        I/O error({}): {}".format(e.errno, e.strerror))
+        maps_file.close()
+        exit(1)
+
+    # read heap
+    mem_file.seek(addr_start)
+    heap = mem_file.read(addr_end - addr_start)
+
+    # find string
+    try:
+        i = heap.index(bytes(search_string, "ASCII"))
+    except Exception:
+        print("Can't find '{}'".format(search_string))
+        maps_file.close()
+        mem_file.close()
+        exit(0)
+    print("[*] Found '{}' at {:x}".format(search_string, i))
+
+    # write the new string
+    print("[*] Writing '{}' at {:x}".format(write_string, addr_start + i))
+    mem_file.seek(addr_start + i)
+    mem_file.write(bytes(write_string, "ASCII"))
+
+    # close files
+    maps_file.close()
     mem_file.close()
-    exit(1)
-print("[*] Found '{}' at {}".format(search_string, h_index))
 
-if len(replace_string) > h_index:
-    raise ValueError("replace string is too long")
-    map_file.close()
-    mem_file.close()
-    exit(1)
-str_position = head_addr + h_index
-mem_file.seek(str_position)
-print("[*] Writing '{}' at {}".format(replace_string, str_position))
-mem_file.write(bytes(replace_string + '\0', "ASCII"))
-map_file.close()
-mem_file.close()
+    # there is only one heap in our example
+    break
