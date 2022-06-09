@@ -6,22 +6,18 @@ contains the main method
 import sys
 
 
-def print_usage_and_exit():
-    """
-    module for printing usage
-    """
+def print_usage():
     print('Usage: {} pid search write'.format(sys.argv[0]))
     sys.exit(1)
 
 
 def main():
     if len(sys.argv) != 4:
-        print_usage_and_exit()
+        print_usage()
 
     pid = int(sys.argv[1])
     if pid <= 0:
-        print_usage_and_exit()
-
+        print_usage()
     search_string = str(sys.argv[2])
     write_string = str(sys.argv[3])
     if len(write_string) > len(search_string):
@@ -31,9 +27,9 @@ def main():
     mem_file_name = '/proc/{}/mem'.format(pid)
 
     try:
-        map_file = open("/proc/{}/maps".format(pid), 'r')
-    except Exception as e:
-        print(e)
+        map_file = open('/proc/{}/maps'.format(pid), 'r')
+    except IOError as e:
+        print('[ERROR] Cannot open file {}'.format(map_file_name))
         sys.exit(1)
 
     for line in map_file:
@@ -55,17 +51,17 @@ def main():
         if len(address) != 2:
             print('Wrong address format')
             map_file.close()
-            sys.exit(1)
+            exit(1)
 
         addr_start = int(address[0], 16)
         addr_end = int(address[1], 16)
 
         try:
-            mem_file = open("/proc/{}/mem".format(pid), 'r+b', 0)
-        except Exception as e:
-            print(e)
+            mem_file = open(mem_file_name, 'rb+')
+        except IOError as e:
+            print('[ERROR] Cannot open file {}'.format(mem_file_name))
             map_file.close()
-            sys.exit(1)
+            exit(1)
 
         mem_file.seek(addr_start)
         heap = mem_file.read(addr_end - addr_start)
@@ -76,7 +72,7 @@ def main():
             print("Can't find '{}'".format(search_string))
             map_file.close()
             mem_file.close()
-            sys.exit(1)
+            exit(1)
 
         print("changing '{}' to '{}' in {}:"
               .format(search_string, write_string, pid))
