@@ -21,9 +21,11 @@ if len(sys.argv) != 4:
 pid = int(sys.argv[1])
 if pid <= 0:
     print_usage_and_exit()
+
 search_string = str(sys.argv[2])
 if search_string == "":
     print_usage_and_exit()
+
 write_string = str(sys.argv[3])
 if write_string == "":
     print_usage_and_exit()
@@ -36,7 +38,7 @@ print("[*] mem: {}".format(mem_filename))
 
 # try opening the maps file
 try:
-    maps_file = open('/proc/{}/maps'.format(pid), 'r')
+    maps_file = open("/proc/{}/maps".format(pid), 'r')
 except IOError as e:
     print("[ERROR] Can not open file {}:".format(maps_filename))
     print("        I/O error({}): {}".format(e.errno, e.strerror))
@@ -74,6 +76,7 @@ for line in maps_file:
         print("[*] Wrong addr format")
         maps_file.close()
         exit(1)
+
     addr_start = int(addr[0], 16)
     addr_end = int(addr[1], 16)
     print("\tAddr start [{:x}] | end [{:x}]".format(addr_start, addr_end))
