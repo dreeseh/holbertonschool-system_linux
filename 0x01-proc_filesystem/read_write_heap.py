@@ -7,7 +7,8 @@ import sys
 
 
 def print_usage():
-    print('Usage: {} pid search replace'.format(sys.argv[0]))
+    print('Usage: {} read_write_heap.py pid search_string replace_string'
+          .format(sys.argv[0]))
     sys.exit(1)
 
 
