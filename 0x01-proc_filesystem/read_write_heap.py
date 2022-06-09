@@ -7,7 +7,7 @@ import sys
 
 
 def print_usage():
-    print('Usage: {} pid search write'.format(sys.argv[0]))
+    print('Usage: {} pid search replace'.format(sys.argv[0]))
     sys.exit(1)
 
 
@@ -19,9 +19,11 @@ def main():
     if pid <= 0:
         print_usage()
     search_string = str(sys.argv[2])
+    if search_string == "":
+        print_usage()
     replace_string = str(sys.argv[3])
-    if len(replace_string) > len(replace_string):
-        raise IndexError
+    if search_string == "":
+        print_usage()
 
     map_file_name = '/proc/{}/maps'.format(pid)
     mem_file_name = '/proc/{}/mem'.format(pid)
