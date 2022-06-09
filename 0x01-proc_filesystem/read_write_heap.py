@@ -115,3 +115,6 @@ for line in maps_file:
 
     # there is only one heap in our example
     break
+
+if __name__ == '__main__':
+    main()
