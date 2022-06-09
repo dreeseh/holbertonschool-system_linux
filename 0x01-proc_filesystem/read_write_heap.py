@@ -64,6 +64,7 @@ def main():
             mem_file = open("/proc/{}/mem".format(pid), 'r+b', 0)
         except Exception as e:
             print(e)
+            map_file.close()
             sys.exit(1)
 
         mem_file.seek(addr_start)
