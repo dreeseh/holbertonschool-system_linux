@@ -11,7 +11,7 @@ import sys
 def print_usage_and_exit():
     print('Usage: {} read_write_heap.py pid search_string replace_string'.
           format(sys.argv[0]))
-    sys.exit(1)
+    exit(1)
 
 
 # check usage
@@ -43,7 +43,7 @@ try:
 except IOError as e:
     print("[ERROR] Can not open file {}:".format(maps_filename))
     print("        I/O error({}): {}".format(e.errno, e.strerror))
-    sys.exit(1)
+    exit(1)
 
 for line in maps_file:
     sline = line.split(' ')
