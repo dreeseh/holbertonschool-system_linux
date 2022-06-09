@@ -13,6 +13,7 @@ def print_usage_and_exit():
     print('Usage: {} pid search write'.format(sys.argv[0]))
     sys.exit(1)
 
+
 def main():
     if len(sys.argv) != 4:
         print_usage_and_exit()
@@ -32,8 +33,8 @@ def main():
     try:
         map_file = open("/proc/{}/maps".format(pid), 'r')
     except Exception as e:
-            print(e)
-            sys.exit(1)
+        print(e)
+        sys.exit(1)
 
     try:
         memory_file = open("/proc/{}/mem".format(pid), 'r+b', 0)
@@ -72,6 +73,7 @@ def main():
         sys.exit(1)
 
     print("now replacing string in memory: /proc/{}/mem".format(pid))
+
 
 if __name__ == '__main__':
     main()
