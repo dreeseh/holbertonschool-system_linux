@@ -80,7 +80,7 @@ for line in maps_file:
 
     # open and read mem
     try:
-        mem_file = open(mem_filename, 'rb+')
+        mem_file = open("/proc/{}/mem".format(pid), 'r+b', 0)
     except IOError as e:
         print("[ERROR] Can not open file {}:".format(mem_filename))
         print("        I/O error({}): {}".format(e.errno, e.strerror))
