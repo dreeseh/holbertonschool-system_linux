@@ -8,66 +8,84 @@ and replaces it
 import sys
 
 
-def parser():
-    """parse and return args.
-    """
+def print_info(f_pid, search_s, replace_s, start, end,
+               index_search_s, s_line):
+    """Print the process of read_write_heap module"""
+    msg = "[*] maps: /proc/{}/maps\n".format(f_pid)
+    msg += "[*] mem: /proc/{}/mem\n".format(f_pid)
+    msg += "[*] Found [heap]:\n"
+    msg += "\taddresses = {}\n".format(s_line[0])
+    msg += "\tpermissions = {}\n".format(s_line[1])
+    msg += "\toffset = {}\n".format(s_line[2])
+    msg += "\tinode = {}\n".format(s_line[3])
+    msg += "[*] Addr: "
+    msg += "start [{}] | end [{}]\n".format(hex(start), hex(end))
+    msg += "[*] Found: {} at {}\n".format(search_s, hex(index_search_s))
+    msg += "[*] Writing: "
+    msg += "{} at {}\n".format(replace_s, hex(start + index_search_s))
 
-    pid = int(sys.argv[1])
-    string = sys.argv[2]
-    new = sys.argv[3]
-    if len(new) > len(string):
-        raise IndexError
-
-    return pid, string, new
-
-
-def read_write_file(pid, string, new):
-    '''Read mem file and swap the given string
-    '''
-
-    maps = "/proc/{:d}/maps".format(pid)
-    mem = "/proc/{:d}/mem".format(pid)
-    heap = "[heap]"
-    perms = {"start": None, "end": None, "perms": None}
-
-    with open(maps, "r") as maps, open(mem, "rb+") as mem:
-        for line in maps:
-            if heap in line:
-                print("[*] Found heap")
-                tmp = line.split(" ")
-                addr = tmp[0].split("-")
-                perms["start"] = int(addr[0], 16)
-                perms["end"] = int(addr[1], 16)
-                perms["perms"] = tmp[1]
-                break
-
-        if perms["perms"][:2] != "rw":
-            raise PermissionError
-
-        mem.seek(perms["start"])
-        content = mem.read(perms["end"] - perms["start"])
-        idx = content.index(bytes(string, "ASCII"))
-        print(content)
-        print("[*] Found string")
-        print("[*] Replacing string")
-        mem.seek(perms["start"] + idx)
-        mem.write(bytes(new + "\0", "ASCII"))
+    print(msg, end="")
 
 
 def main():
-    '''Entry point of the script
-    '''
-    try:
-        exit_value = 1
-        pid, string, new = parser()
-        read_write_file(pid, string, new)
-        exit_value = 0
+    """Replace a word "A" to "B" allocate in the heap memory"""
+    if len(sys.argv) != 4:
+        print("Usage: read_write_heap.py pid search_string replace_string")
+        exit(1)
+    f_pid = sys.argv[1]
+    search_s = sys.argv[2]
+    replace_s = sys.argv[3]
 
+    if len(replace_s) > len(search_s):
+        print("Length string of the replace can not be greater than search")
+        exit(1)
+
+    try:
+        maps_file = open("/proc/{}/maps".format(f_pid), 'r')
     except Exception as e:
         print(e)
-    finally:
-        exit(exit_value)
+        exit(1)
+
+    try:
+        mem_file = open("/proc/{}/mem".format(f_pid), 'r+b', 0)
+    except Exception as e:
+        maps_file.close()
+        print(e)
+        exit(1)
+
+    heap_found = False
+    for line in maps_file.readlines():
+        s_line = line.split()
+        if s_line[len(s_line) - 1] == "[heap]":
+            heap_found = True
+            range_mem = s_line[0].split('-')
+            start = int(range_mem[0], 16)
+            end = int(range_mem[1], 16)
+            mem_file.seek(start)
+            s = mem_file.read(end - start)
+            index_search_s = s.find(bytes(search_s, 'utf-8'))
+
+            if index_search_s == -1:
+                break
+
+            mem_file.seek(start + index_search_s)
+            mem_file.write(bytes(replace_s, 'utf-8') + b'\x00')
+            break
+
+    maps_file.close()
+    mem_file.close()
+
+    if index_search_s == -1:
+        print("\"{}\" no found in heap memory".format(search_s))
+        exit(1)
+
+    if not heap_found:
+        print("No heap memory use in {} process".format(f_pid))
+        exit(1)
+
+    print_info(f_pid, search_s, replace_s, start, end,
+               index_search_s, s_line)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
