@@ -17,7 +17,7 @@ int main(void)
 	{
 		fprintf(stderr, "Can't allocate mem with malloc\n");
 		return (EXIT_FAILURE);
-
+	}
 	i = 0;
 	while (s)
 	{
