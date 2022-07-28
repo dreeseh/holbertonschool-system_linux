@@ -67,3 +67,33 @@ gcc -Wall -Werror -Wextra -pedantic -std=c99 -shared -Wl,-soname,PyList -o libPy
 	- object.h
 	- Common Object Structures
 	- List Objects
+
+### 2. CPython #1: PyBytesObject
+
+---
+
+Create two C functions that print some basic info about Python lists and Python bytes objects.
+
+![Knights Who Say Ni](https://s3.amazonaws.com/intranet-projects-files/holbertonschool-higher-level_programming+/243/giphy-4.gif)
+
+Python lists:
+- Prototype: void print_python_list(PyObject *p);
+- Format: see example
+
+Python bytes:
+- Prototype: void print_python_bytes(PyObject *p);
+- Format: see example
+- Line “first X bytes”: print a maximum of 10 bytes
+- If p is not a valid PyBytesObject, print an error message (see example)
+- Read /usr/include/python3.4/bytesobject.h
+
+About:
+
+- Python version: 3.4
+- Your shared library will be compiled with this command line: gcc -Wall -Werror -Wextra -pedantic -std=c99 -shared -Wl,-soname,libPython.so -o libPython.so -fPIC -I/usr/include/python3.4 2-python.c
+- You are not allowed to use the following macros/functions:
+	- Py_SIZE
+	- Py_TYPE
+	- PyList_GetItem
+	- PyBytes_AS_STRING
+	- PyBytes_GET_SIZE
