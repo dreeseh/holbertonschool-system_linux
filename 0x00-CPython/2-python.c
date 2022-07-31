@@ -67,11 +67,11 @@ void print_python_list(PyObject *p)
 	Py_ssize_t i;
 	const char *t;
 
-	sizeof_pylist = Py_SIZE(p);
+	sizeof_pylist = PyList_Size(p);
 	pylist = (PyListObject *)p;
 
 	printf("[*] Python list info\n");
-	printf("[*] Size of the Python List = %ld\n", sizeof_pylist);
+	printf("[*] Size of the Python List = %li\n", sizeof_pylist);
 	printf("[*] Allocated = %ld\n", pylist->allocated);
 
 	for (i = 0 ; i < sizeof_pylist ; i++)
