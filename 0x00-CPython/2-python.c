@@ -17,6 +17,7 @@ void print_python_bytes(PyObject *p)
 	/* The pointer with the correct type.*/
 	PyBytesObject *s;
 	unsigned int i;
+	Py_ssize_t pySize, bytes_printed;
 
 	printf("[.] bytes object info\n");
 	/* casting the PyObject pointer to a PyBytesObject pointer */
@@ -34,8 +35,10 @@ void print_python_bytes(PyObject *p)
 	 * ob_sval is the array of bytes, ending with the value 0:
 	 * ob_sval[ob_size] == 0
 	 */
+	pySize = ((PyVarObject *)(p))->ob_size;
+	bytes_printed = (pySize + 1 >= 10) ? 10 : pySize + 1;
 	printf("  trying string: %s\n", s->ob_sval);
-	printf("  first 6 bytes:");
+	printf("  first %li bytes:", bytes_printed);
 	/**
 	 * a "string". bytes doesn't have to be strings.
 	 * ob_sval contains space for 'ob_size+1' elements.
