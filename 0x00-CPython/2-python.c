@@ -44,7 +44,7 @@ void print_python_bytes(PyObject *p)
 	 * ob_sval contains space for 'ob_size+1' elements.
 	 * ob_sval[ob_size] == 0.
 	 */
-	for (i = 0; i < s->ob_base.ob_size + 1; i++)
+	for (i = 0 ; i < bytes_printed ; i++)
 	{
 		printf(" %02x", s->ob_sval[i] & 0xff);
 	}
