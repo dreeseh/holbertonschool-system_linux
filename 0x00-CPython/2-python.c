@@ -50,7 +50,7 @@ void print_python_bytes(PyObject *p)
 	/* if this is not a PyBytesObject print an error message */
 	else
 	{
-		fprintf(stderr, "  [ERROR] Invalid Bytes Object\n");
+		fprintf(stdout, "\t[ERROR] Invalid Bytes Object\n");
 	}
 }
 
@@ -75,7 +75,7 @@ void print_python_list(PyObject *p)
 
 	for (i = 0 ; i < sizeof_pylist ; i++)
 	{
-		t = Py_TYPE(pylist->ob_item[i])->tp_name;
+		t = (pylist->ob_item[i])->ob_type->tp_name;
 		printf("Element %ld: %s\n", i, t);
 		if (!strcmp(t, "bytes"))
 			print_python_bytes(pylist->ob_item[i]);
