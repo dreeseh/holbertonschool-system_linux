@@ -35,7 +35,6 @@ void print_python_bytes(PyObject *p)
 	 * ob_sval[ob_size] == 0
 	 */
 	printf("  trying string: %s\n", s->ob_sval);
-	printf("  address of the data: %p\n", (void *)(s->ob_sval));
 	printf("  first 6 bytes:");
 	/**
 	 * a "string". bytes doesn't have to be strings.
