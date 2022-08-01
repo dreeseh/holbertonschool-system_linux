@@ -12,7 +12,7 @@ void print_python_float(PyObject *p)
 	puts("[.] float object info");
 	if (!PyFloat_Check(p))
 	{
-		puts("  [ERROR] Invalid Float Object");
+		printf("  [ERROR] Invalid Float Object");
 		return;
 	}
 
