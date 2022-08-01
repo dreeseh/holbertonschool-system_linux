@@ -92,7 +92,7 @@ void print_python_list(PyObject *p)
 		return;
 	}
 
-	sizeof_pylist = PyList_Size(p);
+	sizeof_pylist = PyList_GET_SIZE(p);
 	pylist = (PyListObject *)p;
 
 	printf("[*] Python list info\n");
