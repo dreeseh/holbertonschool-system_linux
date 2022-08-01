@@ -10,11 +10,12 @@ void print_python_string(PyObject *p)
 		printf("  [ERROR] Invalid String Object\n");
 		return;
 	}
-	
+
 	if (((PyASCIIObject *)p)->state.ascii)
 	{
 		printf("  type: compact ascii\n");
 		printf("  length: %ld\n", ((PyASCIIObject *)p)->length);
+		printf("  value: %ls\n", PyUnicode_AS_UNICODE(p));
 	}
 	else{
 		printf("  type: compact unicode object\n");
