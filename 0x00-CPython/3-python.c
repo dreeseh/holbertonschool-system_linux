@@ -13,13 +13,17 @@ void print_python_float(PyObject *p)
 	puts("[.] float object info");
 	if (!PyFloat_Check(p))
 	{
-		printf("  [ERROR] Invalid Float Object");
+		printf("  [ERROR] Invalid Float Object\n");
 		return;
 	}
 
 	pyString = PyOS_double_to_string(((PyFloatObject *)p)->ob_fval,
 			'g', 16, 0, NULL);
-	printf("  value: %s\n", pyString);
+	
+	if (strchr(pyString, '.'))
+		printf("  value: %s\n", pyString);
+	else
+		printf("  value: %s.0\n", pyString);
 
 	PyMem_Free(pyString);
 }
