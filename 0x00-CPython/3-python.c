@@ -1,4 +1,5 @@
 #include <Python.h>
+#include <float.h>
 
 /**
  * @brief 
@@ -16,7 +17,8 @@ void print_python_float(PyObject *p)
 		return;
 	}
 
-	pyString = PyOS_double_to_string(PyFloat_AsDouble(p), 'r', 0, Py_DTSF_ADD_DOT_0, NULL);
+	pyString = PyOS_double_to_string(((PyFloatObject *)p)->ob_fval,
+			'g', 16, 0, NULL);
 	printf("  value: %s\n", pyString);
 
 	PyMem_Free(pyString);
