@@ -9,9 +9,8 @@
  */
 void print_python_list(PyObject *p)
 {
-	Py_ssize_t sizeof_pylist;
+	Py_ssize_t sizeof_pylist, i;
 	PyListObject *pylist;
-	Py_ssize_t i;
 
 	sizeof_pylist = Py_SIZE(p);
 	pylist = (PyListObject *)p;
