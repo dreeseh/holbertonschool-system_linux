@@ -22,7 +22,7 @@ void print_python_bytes(PyObject *p)
 	printf("[.] bytes object info\n");
 	/* casting the PyObject pointer to a PyBytesObject pointer */
 	s = (PyBytesObject *)p;
-	/* never trust anyone, check that this is actually a PyBytesObject object. */
+	/* check that this is a PyBytesObject object. */
 	if (s && PyBytes_Check(s))
 	{
 	/**
