@@ -26,7 +26,7 @@ int main(int argc, char **argv, char **envp)
 	pid = fork();
 	if (pid == -1)
 	{
-		dprintf(STDERR_FILENO, "Fork failed: %d\n", errno);
+		printf(stderr, "Fork failed\n");
 		exit(EXIT_FAILURE);
 	}
 
@@ -52,17 +52,17 @@ int main(int argc, char **argv, char **envp)
 
 			if (!syscall_return || first_syscall)
 			{
-				if (ptrace(PTRACE_GETREGS, pid,
-				   	NULL, &regs) == -1)
+				if (ptrace(PTRACE_GETREGS, pid, NULL, &regs) == -1)
 					return (1);
 
 				printf("%lu\n", (unsigned long)regs.orig_rax);
 				first_syscall = 0;
 			}
-			fflush(stdout);
+			
 
 		if (ptrace(PTRACE_SYSCALL, pid, NULL, NULL) == -1)
 			return (1);
+		fflush(stdout);
 
 		/* wait will return after every syscall entry and exit */
 		syscall_return = syscall_return ? 0 : 1;
