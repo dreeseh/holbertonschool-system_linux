@@ -73,7 +73,7 @@ int exe_trace(pid_t child_pid)
 
 		if (WIFEXITED(status))
 		{
-			printf(" = ?\n");
+			printf(") = ?\n");
 			break;
 		}
 
