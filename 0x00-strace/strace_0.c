@@ -26,7 +26,7 @@ int main(int argc, char **argv, char **envp)
 	pid = fork();
 	if (pid == -1)
 	{
-		printf(stderr, "Fork failed\n");
+		printf("Fork failed\n");
 		exit(EXIT_FAILURE);
 	}
 
@@ -36,7 +36,7 @@ int main(int argc, char **argv, char **envp)
 
 		if (execve(argv[1], argv + 1, envp) == -1)
 		{
-			dprintf(STDERR_FILENO, "Exec failed: %d\n", errno);
+			printf("Exec failed");
 			exit(EXIT_FAILURE);
 		}
 	}
