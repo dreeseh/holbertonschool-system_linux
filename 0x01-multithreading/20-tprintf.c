@@ -45,13 +45,13 @@ int tprintf(char const *format, ...)
 	if (!format)
 	{
 		printf("format string error");
-		exit (EXIT_FAILURE);
+		exit(EXIT_FAILURE);
 	}
 
 	if (pthread_mutex_lock(&mutex_print) != 0)
 	{
 		printf("Mutex lock has failed\n");
-		exit (EXIT_FAILURE);
+		exit(EXIT_FAILURE);
 	}
 
 	thread_number = pthread_self();
