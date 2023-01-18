@@ -57,7 +57,7 @@ int tprintf(char const *format, ...)
 	thread_number = pthread_self();
 	printf("[%lu] ", thread_number);
 	vprintf(format, arguments);
-	
+
 	if (pthread_mutex_unlock(&mutex_print) != 0)
 	{
 		printf("mutex unlock failed");
