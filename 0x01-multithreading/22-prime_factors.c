@@ -28,12 +28,12 @@ task_t *create_task(task_entry_t entry, void *param)
  */
 void destroy_task(task_t *task)
 {
-	if (task->result)
+	if (task)
 	{
 		list_destroy(task->result, free);
 		free(task->result);
+		free(task);
 	}
-	free(task);
 }
 
 /**
@@ -43,8 +43,8 @@ void destroy_task(task_t *task)
  */
 void *exec_tasks(list_t const *tasks)
 {
-	node_t *new_node;
-	task_t *new_task;
+	node_t *new_node = NULL;
+	task_t *new_task = NULL;
 	int i;
 
 	new_node = tasks->head;
