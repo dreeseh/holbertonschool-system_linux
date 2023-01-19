@@ -28,20 +28,20 @@ task_t *create_task(task_entry_t entry, void *param)
 void destroy_task(task_t *task)
 {
 	/**
-	if (pthread_mutex_trylock(&task->lock) == 0)
-		return;
-
-	if (task->status == SUCCESS || task->status == FAILURE)
-	{
-		if (task != NULL)
-		{
-			task->entry = NULL;
-			task->param = NULL;
-			task->status = PENDING;
-			task->result = NULL;
-		}
-	}
-	pthread_mutex_unlock(&task->lock);
+	*if (pthread_mutex_trylock(&task->lock) == 0)
+	*	return;
+	*
+	*if (task->status == SUCCESS || task->status == FAILURE)
+	*{
+	*	if (task != NULL)
+	*	{
+	*		task->entry = NULL;
+	*		task->param = NULL;
+	*		task->status = PENDING;
+	*		task->result = NULL;
+	*	}
+	*}
+	*pthread_mutex_unlock(&task->lock);
 	*/
 	if (task->result)
 	{
