@@ -27,7 +27,7 @@ task_t *create_task(task_entry_t entry, void *param)
  */
 void destroy_task(task_t *task)
 {
-
+	/**
 	if (pthread_mutex_trylock(&task->lock) == 0)
 		return;
 
@@ -42,7 +42,7 @@ void destroy_task(task_t *task)
 		}
 	}
 	pthread_mutex_unlock(&task->lock);
-
+	*/
 	if (task->result)
 	{
 		list_destroy((list_t *) task->result, free);
