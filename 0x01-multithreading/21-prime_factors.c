@@ -34,6 +34,6 @@ list_t *prime_factors(char const *s)
 		*temp = num;
 		list_add(list, temp);
 	}
-	list_destroy(list, free);
+	
 	return (list);
 }
