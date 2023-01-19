@@ -8,7 +8,8 @@
 list_t *prime_factors(char const *s)
 {
 	unsigned long num;
-	unsigned long *temp, prime = 2;
+	unsigned long *temp;
+	unsigned long prime = 2;
 	list_t *list = malloc(sizeof(list_t));
 
 	list_init(list);
@@ -20,17 +21,19 @@ list_t *prime_factors(char const *s)
 		{
 			temp = malloc(sizeof(unsigned long));
 			*temp = prime;
-			list_add(list, (void *)temp);
+			list_add(list, temp);
 			num /= prime;
 		}
 		prime += 1 + (prime != 2);
+		
 	}
 
 	if (num >= 2)
 	{
 		temp = malloc(sizeof(unsigned long));
 		*temp = num;
-		list_add(list, (void *)temp);
+		list_add(list, temp);
 	}
+	list_destroy(list, free);
 	return (list);
 }

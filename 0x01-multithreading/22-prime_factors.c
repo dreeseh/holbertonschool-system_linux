@@ -1,5 +1,11 @@
 #include "multithreading.h"
 
+/**
+ * create_task - creates the task
+ * @entry: is a pointer to the entry function of the task
+ * @param: the parameter that will later be passed
+ * Return: is task_t*
+ */
 task_t *create_task(task_entry_t entry, void *param)
 {
 	task_t *new_task;
@@ -10,16 +16,21 @@ task_t *create_task(task_entry_t entry, void *param)
 	new_task->param = param;
 	new_task->status = 0;
 	pthread_mutex_init(&new_task->lock, NULL);
-	
-	return(new_task);
+
+	return (new_task);
 }
 
+/**
+ * destroy_task - destroys a task
+ * @task: a pointer to the task to destroy
+ * Return: is void
+ */
 void destroy_task(task_t *task)
 {
 
 	if (pthread_mutex_trylock(&task->lock) == 0)
 		return;
-	
+
 	if (task->status == SUCCESS || task->status == FAILURE)
 	{
 		if (task != NULL)
@@ -32,9 +43,19 @@ void destroy_task(task_t *task)
 	}
 	pthread_mutex_unlock(&task->lock);
 
+	if (task->result)
+	{
+		list_destroy((list_t *) task->result, free);
+		free((list_t *) task->result);
+	}
 	free(task);
 }
 
+/**
+ * exec_tasks - executes the tasks
+ * @tasks: list of tasks
+ * Return: is void*
+ */
 void *exec_tasks(list_t const *tasks)
 {
 	node_t *this_node = NULL;
@@ -72,5 +93,5 @@ void *exec_tasks(list_t const *tasks)
 		this_node = this_node->next;
 		id++;
 	}
-	return(NULL);
+	return (NULL);
 }
