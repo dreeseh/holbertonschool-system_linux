@@ -1,70 +1,76 @@
 #include "multithreading.h"
 
-/**
- * create_task - creates the task
- * @entry: a pointer to the entry function of the task
- * @param: the parameter that will later be passed to the entry function
- * Return: a pointer to the created task structure: task_t*
- */
 task_t *create_task(task_entry_t entry, void *param)
 {
-	task_t *new_task = malloc(sizeof(task_t));
+	task_t *new_task;
 
-	if (!new_task)
-		return (NULL);
+	new_task = calloc(1, sizeof(task_t));
 
 	new_task->entry = entry;
 	new_task->param = param;
-	new_task->status = PENDING;
-	new_task->result = NULL;
-
-	return (new_task);
+	new_task->status = 0;
+	pthread_mutex_init(&new_task->lock, NULL);
+	
+	return(new_task);
 }
 
-/**
- * destroy_task - destroks the task
- * @task: a pointer to the task to destroy
- * Return: is void
- */
 void destroy_task(task_t *task)
 {
-	if (task)
+
+	if (pthread_mutex_trylock(&task->lock) == 0)
+		return;
+	
+	if (task->status == SUCCESS || task->status == FAILURE)
 	{
-		list_destroy(task->result, free);
-		free(task->result);
-		free(task);
+		if (task != NULL)
+		{
+			task->entry = NULL;
+			task->param = NULL;
+			task->status = PENDING;
+			task->result = NULL;
+		}
 	}
+	pthread_mutex_unlock(&task->lock);
+
+	free(task);
 }
 
-/**
- * exec_tasks - executes the list of tasks
- * @tasks: a pointer to the list of tasks to be executed
- * Return: is void*
- */
 void *exec_tasks(list_t const *tasks)
 {
-	node_t *new_node = NULL;
+	node_t *this_node = NULL;
 	task_t *new_task = NULL;
-	int i;
+	int id = 0;
 
-	new_node = tasks->head;
-	while (new_node)
+
+	this_node = tasks->head;
+	while (this_node != NULL)
 	{
-		new_task = new_node->content;
-		if (new_task->status == PENDING)
+		new_task = this_node->content;
+		if (pthread_mutex_trylock(&new_task->lock) == 0)
+		{
+			this_node = this_node->next;
+			id++;
+			continue;
+		}
+
+		if ((new_task->status) == PENDING)
 		{
 			new_task->status = STARTED;
-			tprintf("[%02d] Started\n", i);
-			new_task->result = (void *)(((list_t *(*) (char const *))
-					new_task->entry)((char const *) new_task->param));
-			tprintf("[%02d] Success\n", i);
+			tprintf("[%02d] Started\n", id);
+			new_task->result = new_task->entry(new_task->param);
 			if (new_task->result == NULL)
+			{
 				new_task->status = FAILURE;
+				tprintf("[%02d] Failure\n", id);
+			}
 			else
+			{
 				new_task->status = SUCCESS;
+				tprintf("[%02d] Success\n", id);
+			}
 		}
-		new_node = new_node->next;
-		i++;
+		this_node = this_node->next;
+		id++;
 	}
-	return (NULL);
+	return(NULL);
 }
