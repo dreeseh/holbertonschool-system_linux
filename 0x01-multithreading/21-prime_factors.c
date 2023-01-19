@@ -25,7 +25,7 @@ list_t *prime_factors(char const *s)
 			num /= prime;
 		}
 		prime += 1 + (prime != 2);
-		
+
 	}
 
 	if (num >= 2)
@@ -34,6 +34,6 @@ list_t *prime_factors(char const *s)
 		*temp = num;
 		list_add(list, temp);
 	}
-	
+
 	return (list);
 }
