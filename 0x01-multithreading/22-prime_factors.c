@@ -62,6 +62,10 @@ void *exec_tasks(list_t const *tasks)
 	task_t *new_task = NULL;
 	int id = 0;
 
+	if (tasks == NULL)
+	{
+		pthread_exit(NULL);
+	}
 
 	this_node = tasks->head;
 	while (this_node != NULL)
