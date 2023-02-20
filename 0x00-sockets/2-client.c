@@ -16,7 +16,7 @@
 int main(int argc, char **argv)
 {
 	int client_socket;
-	const char *message = "Yo yo yo! My main server!";
+	const void *message = "Yo yo yo! My main server!";
 	struct sockaddr_in server_address;
 
 	if (argc != 3)
@@ -46,7 +46,7 @@ int main(int argc, char **argv)
 		exit(EXIT_FAILURE);
 	}
 	/** send a message to the server */
-	if (send(client_socket, message, strlen(message), 0) < 0)
+	if (send(client_socket, &message, strlen(message), 0) < 0)
 	{
 		perror("send error");
 		exit(EXIT_FAILURE);
