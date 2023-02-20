@@ -50,7 +50,7 @@ int main(int argc, char **argv)
 		perror("send error");
 		exit(EXIT_FAILURE);
 	}
-	printf("Connection established successfully!\n");
+	printf("Connected to localhost: %s\n", argv[2]);
 	/** close the socket */
 	close(client_socket);
 	return (0);
