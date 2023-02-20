@@ -53,7 +53,7 @@ int main(int argc, char **argv)
 	}
 	else
 	{
-		printf("Connected to %s:%s\n", argv[1], argv[2]);
+		printf("Connected to %s:%u\n", argv[1], ntohs(server_address.sin_port));
 	}
 	/** close the socket */
 	close(client_socket);
