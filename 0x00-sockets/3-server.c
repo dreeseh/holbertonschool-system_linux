@@ -38,7 +38,7 @@ int main(void)
 		perror("listen failed");
 		exit(EXIT_FAILURE);
 	}
-	printf("Listening on port %d...\n", PORT);
+	printf("Server listening on port %d\n", PORT);
 	while (1) /** Accept incoming connections and print client IP address */
 	{
 		new_socket = accept(fd_server, (struct sockaddr *)&address,
@@ -48,9 +48,7 @@ int main(void)
 			perror("accept failed");
 			exit(EXIT_FAILURE);
 		}
-		printf("Client connected: %s:%d\n",
-			inet_ntoa(address.sin_addr),
-			ntohs(address.sin_port));
+		printf("Client connected: %s\n", inet_ntoa(address.sin_addr));
 
 		/** Receive data from the client */
 		fd_client_sock = new_socket;
