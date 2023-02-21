@@ -48,10 +48,7 @@ int main(void)
 		fd_client_sock = new_socket; /** Receive data from the client */
 		num_bytes = read(fd_client_sock, buffer, 1024);
 		if (num_bytes < 0)
-		{
-			perror("read failed");
 			exit(EXIT_FAILURE);
-		}
 		printf("Message received: \"%s\"\n", buffer); /** Print the message */
 		close(new_socket); /** Close the connection */
 		close(fd_client_sock);
