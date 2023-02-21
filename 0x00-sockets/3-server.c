@@ -59,7 +59,7 @@ int main(void)
 		}
 
 		/** Print the received message */
-		printf("Message Recieved: %s\n", buffer);
+		printf("Message recieved: \"%s\n\"", buffer);
 
 		close(new_socket); /** Close the connection */
 		close(fd_client_sock);
