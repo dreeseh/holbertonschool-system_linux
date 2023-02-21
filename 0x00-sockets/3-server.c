@@ -32,12 +32,8 @@ int main(void)
 	address.sin_port = htons(PORT);
 	if (bind(fd_server, (struct sockaddr *)&address, sizeof(address)) < 0)
 		exit(EXIT_FAILURE);
-
 	if (listen(fd_server, 3) < 0) /** Listen for incoming connections */
-	{
-		perror("listen failed");
 		exit(EXIT_FAILURE);
-	}
 	printf("Server listening on port %d\n", PORT);
 	while (1) /** Accept incoming connections and print client IP address */
 	{
@@ -49,18 +45,14 @@ int main(void)
 			exit(EXIT_FAILURE);
 		}
 		printf("Client connected: %s\n", inet_ntoa(address.sin_addr));
-
-		/** Receive data from the client */
-		fd_client_sock = new_socket;
-		if ((num_bytes = read(fd_client_sock, buffer, 1024)) < 0)
+		fd_client_sock = new_socket; /** Receive data from the client */
+		num_bytes = read(fd_client_sock, buffer, 1024);
+		if (num_bytes < 0)
 		{
 			perror("read failed");
 			exit(EXIT_FAILURE);
 		}
-
-		/** Print the received message */
-		printf("Message recieved: \"%s\"\n", buffer);
-
+		printf("Message received: \"%s\"\n", buffer); /** Print the message */
 		close(new_socket); /** Close the connection */
 		close(fd_client_sock);
 		exit(EXIT_SUCCESS);
