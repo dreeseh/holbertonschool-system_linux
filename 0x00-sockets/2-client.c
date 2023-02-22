@@ -34,11 +34,8 @@ int main(int argc, char **argv)
 	/** connect to the server */
 	server_address.sin_family = AF_INET;
 	server_address.sin_port = htons(atoi(argv[2]));
-	if (inet_pton(AF_INET, argv[1], &server_address.sin_addr) > 0)
-	{
-		perror("inet_pton error");
-		exit(EXIT_FAILURE);
-	}
+	inet_pton(AF_INET, argv[1], &server_address.sin_addr);
+
 	if (connect(client_socket, (struct sockaddr *)&server_address,
 					sizeof(server_address)) < 0)
 	{
@@ -51,4 +48,6 @@ int main(int argc, char **argv)
 	/** close the socket */
 	close(client_socket);
 	return (EXIT_SUCCESS);
+	(void)argv;
+	(void)argv;
 }
