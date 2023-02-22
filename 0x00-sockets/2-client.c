@@ -16,7 +16,7 @@
  */
 int main(int argc, char **argv)
 {
-	int client_socket;
+	int fd_client;
 	struct sockaddr_in server_address;
 
 	if (argc != 3)
@@ -25,8 +25,8 @@ int main(int argc, char **argv)
 		exit(EXIT_FAILURE);
 	}
 	/** create a socket */
-	client_socket = socket(PF_INET, SOCK_STREAM, 0);
-	if (client_socket < 0)
+	fd_client = socket(PF_INET, SOCK_STREAM, 0);
+	if (fd_client < 0)
 	{
 		perror("socket create error");
 		exit(EXIT_FAILURE);
@@ -36,17 +36,17 @@ int main(int argc, char **argv)
 	server_address.sin_port = htons(atoi(argv[2]));
 	inet_pton(AF_INET, argv[1], &server_address.sin_addr);
 
-	if (connect(client_socket, (struct sockaddr *)&server_address,
-					sizeof(server_address)) < 0)
+	if (connect(fd_client, (struct sockaddr *)&server_address,
+					sizeof(server_address)) == -1)
 	{
 		perror("client socket connect error");
 		exit(EXIT_FAILURE);
 	}
 
-	printf("Connected to %s:%s\n", argv[1], argv[2]);
+	fprintf(stdout, "Connected to %s:%s\n", argv[1], argv[2]);
 
 	/** close the socket */
-	close(client_socket);
+	close(fd_client);
 	return (EXIT_SUCCESS);
 	(void)argv;
 	(void)argv;
