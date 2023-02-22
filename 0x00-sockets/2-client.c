@@ -25,7 +25,7 @@ int main(int argc, char **argv)
 		exit(EXIT_FAILURE);
 	}
 	/** create a socket */
-	client_socket = socket(AF_INET, SOCK_STREAM, 0);
+	client_socket = socket(PF_INET, SOCK_STREAM, 0);
 	if (client_socket < 0)
 	{
 		perror("socket create error");
@@ -45,7 +45,7 @@ int main(int argc, char **argv)
 		perror("client socket connect error");
 		exit(EXIT_FAILURE);
 	}
-	
+
 	printf("Connected to %s:%s\n", argv[1], argv[2]);
 
 	/** close the socket */
