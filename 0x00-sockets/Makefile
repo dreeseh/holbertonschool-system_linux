@@ -5,5 +5,12 @@ SRC0 = 4-request.c spinup_server.c
 OBJ0 = $(SRC0:.c = o)
 NAME0 = todo_api_0
 
+SRC1 = 5-queries.c spinup_server.c
+OBJ1 = $(SRC1:.c = o)
+NAME1 = todo_api_1
+
 todo_api_0: server_API.h $(OBJ0)
 	$(CC) $(OBJ0) -o $(NAME0)
+
+todo_api_1: server_API.h $(OBJ1)
+	$(CC) $(OBJ1) -o $(NAME1)
