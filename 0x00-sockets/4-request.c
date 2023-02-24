@@ -14,12 +14,13 @@ int break_print_request(int fd_client_socket)
 	char *method, *path, *http_version;
 
 	read(fd_client_socket, buffer, 1024);
-	printf("Raw request: %s\n", buffer);
+	printf("Raw request: \"%s", buffer);
 
 	method = strtok(buffer, " ");
         path = strtok(NULL, " ");
         http_version = strtok(NULL, "\r\n");
 
+	printf("\"\n");
 	printf("Method: %s\n", method);
         printf("Path: %s\n", path);
         printf("Version: %s\n", http_version);
