@@ -13,6 +13,10 @@ SRC2 = 6-headers.c spinup_server.c
 OBJ2 = $(SRC2:.c = o)
 NAME2 = todo_api_2
 
+SRC3 = 7-body_parameters.c spinup_server.c
+OBJ3 = $(SRC3:.c = o)
+NAME3 = todo_api_3
+
 todo_api_0: server_API.h $(OBJ0)
 	$(CC) $(OBJ0) -o $(NAME0)
 
@@ -21,3 +25,6 @@ todo_api_1: server_API.h $(OBJ1)
 
 todo_api_2: server_API.h $(OBJ2)
 	$(CC) $(OBJ2) -o $(NAME2)
+
+todo_api_3: server_API.h $(OBJ3)
+	$(CC) $(OBJ3) -o $(NAME3)
